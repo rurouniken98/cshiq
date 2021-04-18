@@ -1,0 +1,8 @@
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\bin\Debug\CodeHub.dll
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\bin\Debug\CodeHub.pdb
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\bin\Debug\Humanizer.dll
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\obj\Debug\CodeHub.csprojAssemblyReference.cache
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\obj\Debug\CodeHub.csproj.CoreCompileInputs.cache
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\obj\Debug\CodeHub.csproj.CopyComplete
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\obj\Debug\CodeHub.dll
+C:\Users\Kenshin\Downloads\CodeHub-master\CodeHub-master\CodeHub\obj\Debug\CodeHub.pdb
