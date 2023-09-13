@@ -1,1 +1,9 @@
-
+name: Test DAST
+run-name: ${{ github.actor }} is testing out DAST Actions 
+on:
+  workflow_dispatch:
+jobs:
+  Fortify-DAST:
+    runs-on: kenshinself
+    steps:
+      - run: curl https://www.google.com
