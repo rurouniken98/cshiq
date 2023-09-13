@@ -6,4 +6,5 @@ jobs:
   Fortify-DAST:
     runs-on: kenself
     steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "Love Netpoleons"
