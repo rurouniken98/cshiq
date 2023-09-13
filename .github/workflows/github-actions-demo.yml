@@ -4,6 +4,6 @@ on:
   workflow_dispatch:
 jobs:
   Fortify-DAST:
-    runs-on: kenshinself
+    runs-on: kenself
     steps:
       - run: curl https://www.google.com
