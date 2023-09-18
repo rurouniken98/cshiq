@@ -1,0 +1,12 @@
+name: TAST DEST
+run-name: ${{ github.actor }} is testing out DAST Actions 
+on:
+  workflow_dispatch:
+jobs:
+  Fortify-DAST:
+    runs-on: ubuntu-latest
+    steps:
+    - name: testpipe
+      run:
+        $token = ((curl -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" 
+      
