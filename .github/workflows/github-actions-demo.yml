@@ -1,4 +1,4 @@
-honame: Test DAST
+name: Test DAST
 run-name: ${{ github.actor }} is testing out DAST Actions 
 on:
   workflow_dispatch:
