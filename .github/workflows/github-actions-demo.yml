@@ -10,4 +10,4 @@ jobs:
     runs-on: kenself
     steps:
       - run: echo "$ken"
-      - run: echo $bank
+      - run: echo $env:bank
