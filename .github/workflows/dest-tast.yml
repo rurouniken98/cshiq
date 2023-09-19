@@ -1,16 +1,16 @@
-name: DEST TAST
-run-name: ${{ github.actor }} is testing out DAST Actions 
+name: FORTIFY-SCANCENTRAL-DAST
+run-name: ${{ github.actor }} is testing on triggering Fortify ScanCentral DAST Scanning using Linux Runner 
 on:
   # workflow_dispatch:
   push:
     branches:
       - "main"
-      - "test"
+      - "dev"
 jobs:
   Fortify-DAST:
     runs-on: kenlin
     steps:
-    - name: Set AUTH_RESP environment variable
+    - name: Trigger Fortify ScanCentral DAST Scanning using Linux Runner 
       shell: bash
       run: |
         echo "AUTHENTICATING...   "
