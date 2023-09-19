@@ -6,10 +6,11 @@ jobs:
   Fortify-DAST:
     runs-on: kenself
     steps:
-      - run: |
-          $test = ((curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" | ConvertFrom-Json).token).trim()
-          echo $test
-          echo $env:test
-          echo (test2=((curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" | ConvertFrom-Json).token).trim() >> $GITHUB_ENV)
-          echo $test2
-          echo $env:test2
+    - name: testpipe
+      run: |
+        $token = ((curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" | ConvertFrom-Json).token).trim()
+        echo "$tokenres = echo ${token}" >> $GITHUB_ENV
+        echo $tokenres
+    - run:
+        echo $tokenres
+        #curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/scans/start-scan-cicd' -H 'accept:text/plain' -H 'Authorization:${tokenres}' -H 'Content-Type:application/json-patch+json' -d "{'cicdToken':'4ebc1b34-be5e-48f3-981a-ba4e16e9891f','name':'testcicd','scannerId':0,'useAssignedScannerOnly':true,'overrides':{'dataRetentionDays':0,'scanPriority':5,'scanMode':2,}}"
