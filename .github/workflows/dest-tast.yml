@@ -17,7 +17,7 @@ jobs:
         echo "AUTH_RESP=$AUTH_RESP" >> $GITHUB_ENV
         echo "AUTHENTICATION RESPONSE =>   $AUTH_RESP"
         echo "STARTING TOKEN EXTRACTION FROM AUTH RESP...   "
-        FFTOKEN=$(echo $AUTH_RESP | grep -o '"token":"FORTIFYTOKEN [^"]\+' | cut -d '"' -f 4)
+        FFTOKEN=$(echo $AUTH_RESP | grep -o '"token":"FORTIFYTOKEN [^"]\+')
         echo "FFTOKEN=$FFTOKEN" >> $GITHUB_ENV
         echo "STARTING SCANNING...   "
         curl -X 'POST' -I -s --insecure 'https://172.16.67.168:5001/api/v2/scans/start-scan-cicd' -H 'accept:text/plain' -H "Authorization:$FFTOKEN" -H 'Content-Type:application/json-patch+json' -d "{'cicdToken':'4ebc1b34-be5e-48f3-981a-ba4e16e9891f','name':'testcicd','scannerId':0,'useAssignedScannerOnly':true,'overrides':{'dataRetentionDays':0,'scanPriority':5,'scanMode':2}}"
