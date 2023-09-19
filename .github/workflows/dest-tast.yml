@@ -18,6 +18,7 @@ jobs:
         AUTH_RESP: ${{ steps.set-env.outputs.AUTH_RESP }}
     - name: Use AUTH_RESP to start a scan
       run: |
+        echo "$AUTH_RESP"
         FFTOKEN=$(echo $AUTH_RESP | grep -o '"token":"FORTIFYTOKEN [^"]\+' | cut -d '"' -f 4)
         echo "FFTOKEN=$FFTOKEN" >> $GITHUB_ENV
         echo "$FFTOKEN"
