@@ -1,14 +1,28 @@
 name: DEST TAST
 run-name: ${{ github.actor }} is testing out DAST Actions 
 on:
-  workflow_dispatch:
+  # workflow_dispatch:
+  push:
+    branches:
+      - "main"
+      - "test"
 jobs:
   Fortify-DAST:
-    runs-on: kenself
+    runs-on: kenlin
     steps:
-    - name: testpipe
+    - name: Set AUTH_RESP environment variable
+      shell: bash
       run: |
-        $token = ((curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" | ConvertFrom-Json).token).trim()
-        echo $token
-        ((curl.exe -X 'POST' --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}" | ConvertFrom-Json).token).trim()
-        #curl.exe -X 'POST' -v --insecure 'https://172.16.67.168:5001/api/v2/scans/start-scan-cicd' -H 'accept:text/plain' -H "Authorization:$token" -H 'Content-Type:application/json-patch+json' -d "{'cicdToken':'4ebc1b34-be5e-48f3-981a-ba4e16e9891f','name':'testcicd','scannerId':0,'useAssignedScannerOnly':true,'overrides':{'dataRetentionDays':0,'scanPriority':5,'scanMode':2}}"
+        echo "AUTHENTICATING...   "
+        AUTH_RESP=$(curl -X 'POST' -s --insecure 'https://172.16.67.168:5001/api/v2/auth' -H 'accept:text/plain' -H 'Content-Type:application/json-patch+json' -d "{'username':'admin', 'password':'Netpoleon#1'}")
+        echo "AUTH_RESP=$AUTH_RESP" >> $GITHUB_ENV
+        echo "AUTHENTICATION RESPONSE =>   $AUTH_RESP"
+        echo "STARTING TOKEN EXTRACTION FROM AUTH RESP...   "
+        FFTOKEN=$(echo $AUTH_RESP | grep -o '"token":"FORTIFYTOKEN [^"]\+' | cut -d '"' -f 4)
+        echo "FFTOKEN=$FFTOKEN" >> $GITHUB_ENV
+        echo "SCAN TOKEN =>   $FFTOKEN"
+        echo "STARTING SCANNING...   "
+        SCAN_RESP=$(curl -X 'POST' -s --insecure 'https://172.16.67.168:5001/api/v2/scans/start-scan-cicd' -H 'accept:text/plain' -H "Authorization:$FFTOKEN" -H 'Content-Type:application/json-patch+json' -d "{'cicdToken':'4ebc1b34-be5e-48f3-981a-ba4e16e9891f','name':'FROM-GH-ACTIONS','scannerId':0,'useAssignedScannerOnly':true,'overrides':{'dataRetentionDays':0,'scanPriority':5,'scanMode':2}}")
+        echo "SCAN_RESP=$SCAN_RESP" >> $GITHUB_ENV
+        echo "SCAN RESPONSE =>   $SCAN_RESP"
+        echo "DONE!"
